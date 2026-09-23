@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_gm"]
 [ext_resource type="Texture2D" path="res://assets/icons/menu_backdrop.png" id="2_backdrop"]
@@ -79,7 +79,7 @@ shadow_color = Color(0.24, 0.97, 1.0, 0.75)
 shadow_size = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_MenuFrame"]
-bg_color = Color(0.02, 0.05, 0.12, 0.92)
+bg_color = Color(0.02, 0.05, 0.12, 0.94)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -117,6 +117,18 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 shadow_color = Color(0.55, 0.36, 1.0, 0.5)
 shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_OptionActive"]
+bg_color = Color(0.12, 0.35, 0.55, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.24, 0.97, 1.0, 1.0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_gm")
@@ -279,6 +291,8 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1.0, 0.82, 0.26, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBox_Badge")
 text = "COMBO: x2"
@@ -289,6 +303,8 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBox_Badge")
 text = "⚡ OVERCLOCK SLOW [5.2s]"
@@ -324,70 +340,204 @@ grow_vertical = 2
 color = Color(0.02, 0.04, 0.08, 0.65)
 
 [node name="MenuFrame" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
-custom_minimum_size = Vector2(580, 500)
+custom_minimum_size = Vector2(920, 560)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -290.0
-offset_top = -250.0
-offset_right = 290.0
-offset_bottom = 250.0
+offset_left = -460.0
+offset_top = -280.0
+offset_right = 460.0
+offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_MenuFrame")
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/MenuFrame"]
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/StartOverlay/MenuFrame"]
 layout_mode = 2
-theme_override_constants/separation = 10
-alignment = 1
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 28
 
-[node name="LogoEmblem" type="TextureRect" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
-custom_minimum_size = Vector2(100, 100)
+[node name="Columns" type="HBoxContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 28
+
+[node name="TelemetryDeck" type="VBoxContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="DeckHeader" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.74, 0.92, 1)
+theme_override_font_sizes/font_size = 12
+text = "// NEURAL IDENTITY DECK //"
+
+[node name="LogoEmblem" type="TextureRect" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+custom_minimum_size = Vector2(112, 112)
 layout_mode = 2
 size_flags_horizontal = 4
 texture = ExtResource("3_logo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="StartTitleLabel" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
+[node name="StartTitleLabel" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
-theme_override_font_sizes/font_size = 34
+theme_override_colors/font_outline_color = Color(0.1, 0.4, 0.8, 0.6)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 36
 text = "NEON SERPENT"
 horizontal_alignment = 1
 
-[node name="StartSubtitle" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
+[node name="StartSubtitle" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.65, 0.88, 1.0, 1)
-theme_override_font_sizes/font_size = 13
-text = "// SYSTEM ONLINE // SURVIVE THE GRID //"
+theme_override_font_sizes/font_size = 12
+text = "SYNTHETIC ARCADE // BUILD NS-0.1"
 horizontal_alignment = 1
 
-[node name="Divider" type="HSeparator" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
-custom_minimum_size = Vector2(380, 12)
+[node name="Divider" type="HSeparator" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
 layout_mode = 2
-size_flags_horizontal = 4
 
-[node name="StartButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 50)
+[node name="TelemetryTitle" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+text = "SYSTEM TELEMETRY"
+
+[node name="RecordCard" type="PanelContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Card")
+
+[node name="Text" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck/RecordCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "GRID RECORD\nSYNCED WITH LIVE HUD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkCard" type="PanelContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Card")
+
+[node name="Text" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck/LinkCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "NEURAL LINK\nREADY // STABLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProtocolCard" type="PanelContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_Card")
+
+[node name="Text" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck/ProtocolCard"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "ACTIVE PROTOCOL\nCLASSIC GRID"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ControlsHint" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42, 0.62, 0.78, 1)
+theme_override_font_sizes/font_size = 11
+text = "ARROWS / WASD : NAVIGATE\nENTER : EXECUTE\nP / SPACE : PAUSE\nF11 : FULLSCREEN"
+
+[node name="NodeStatus" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/TelemetryDeck"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.55, 0.68, 1)
+theme_override_font_sizes/font_size = 10
+text = "NODE // BAGHDAD-01     SIGNAL // NOMINAL"
+
+[node name="CommandConsole" type="VBoxContainer" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="ConsoleTitle" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_font_sizes/font_size = 20
+text = "COMMAND CONSOLE"
+
+[node name="ConsoleSub" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.78, 0.92, 1)
+theme_override_font_sizes/font_size = 12
+text = "SELECT A GRID PROTOCOL // EXECUTE COMMAND"
+
+[node name="ConsoleDivider" type="HSeparator" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 62)
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
 theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
 theme_override_styles/pressed = SubResource("StyleBox_Btn_Hover")
 text = "INITIALIZE LINK [ ENTER ]"
 
-[node name="HowToPlayButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 42)
+[node name="StartDesc" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
 layout_mode = 2
-size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.52, 0.76, 0.88, 1)
+theme_override_font_sizes/font_size = 10
+text = "ENTER THE ACTIVE GRID"
+
+[node name="ModesButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Sec_Hover")
+text = "MAP & MODE: [ CLASSIC GRID ]"
+
+[node name="ModesDesc" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.52, 0.66, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "CLASSIC ONLINE // OTHER PROTOCOLS LOCKED"
+
+[node name="SettingsButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.8, 1.0, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Sec_Hover")
+text = "SYSTEM SETTINGS [ AUDIO & DISPLAY ]"
+
+[node name="SettingsDesc" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.52, 0.66, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "AUDIO, SCREEN SHAKE, DISPLAY PREFERENCES"
+
+[node name="HowToPlayButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
+layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 1.0, 1)
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
@@ -395,29 +545,121 @@ theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
 theme_override_styles/pressed = SubResource("StyleBox_Btn_Sec_Hover")
 text = "TACTICAL BRIEFING [ DATA ]"
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 38)
+[node name="BriefingDesc" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.7, 0.75, 0.85, 1)
+theme_override_colors/font_color = Color(0.52, 0.66, 0.82, 1)
+theme_override_font_sizes/font_size = 10
+text = "REVIEW POWER-UPS, COMBOS, AND CONTROLS"
+
+[node name="ConsoleSpacer" type="Control" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.62, 1)
 theme_override_font_sizes/font_size = 13
 theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
 theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
 theme_override_styles/pressed = SubResource("StyleBox_Btn_Sec_Hover")
 text = "TERMINATE SESSION"
 
-[node name="Hint" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/VBox"]
+[node name="ExitDesc" type="Label" parent="CanvasLayer/StartOverlay/MenuFrame/Margin/Columns/CommandConsole"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.42, 0.62, 0.78, 1)
-theme_override_font_sizes/font_size = 11
-text = "WASD / ARROWS : MOVE  •  P : PAUSE  •  F11 : FULLSCREEN"
-horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.65, 0.45, 0.54, 1)
+theme_override_font_sizes/font_size = 10
+text = "CLOSE THE NEON SERPENT APPLICATION"
 
-[node name="BriefingModal" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
+[node name="ModesModal" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(520, 380)
+custom_minimum_size = Vector2(580, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -290.0
+offset_top = -210.0
+offset_right = 290.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_Overlay")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/ModesModal"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_font_sizes/font_size = 22
+text = "// SELECT PROTOCOL & MAP //"
+horizontal_alignment = 1
+
+[node name="ModeClassicBtn" type="Button" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+text = "PROTOCOL 1: CLASSIC GRID [ OPEN ARENA + POWERUPS ]"
+
+[node name="ModeMazeBtn" type="Button" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+text = "PROTOCOL 2: CIRCUIT MAZE [ HAZARD BLOCKS ]"
+
+[node name="ModeZenBtn" type="Button" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+text = "PROTOCOL 3: ZEN WRAP [ INFINITE WALL TELEPORT ]"
+
+[node name="ModeExtinctionBtn" type="Button" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(480, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 13
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+text = "PROTOCOL 4: GRID EXTINCTION [ SHRINKING ARENA ]"
+
+[node name="CloseModesBtn" type="Button" parent="CanvasLayer/StartOverlay/ModesModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 38)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
+text = "CONFIRM SELECTION"
+
+[node name="SettingsModal" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(520, 400)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -425,16 +667,99 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -260.0
-offset_top = -190.0
+offset_top = -200.0
 offset_right = 260.0
-offset_bottom = 190.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_Overlay")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/SettingsModal"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/StartOverlay/SettingsModal/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.24, 0.97, 1.0, 1)
+theme_override_font_sizes/font_size = 22
+text = "// SYSTEM CONFIGURATION //"
+horizontal_alignment = 1
+
+[node name="AudioBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/SettingsModal/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="MusicLabel" type="Label" parent="CanvasLayer/StartOverlay/SettingsModal/VBox/AudioBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+text = "SYNTHWAVE BGM VOLUME"
+
+[node name="MusicSlider" type="HSlider" parent="CanvasLayer/StartOverlay/SettingsModal/VBox/AudioBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.05
+value = 0.7
+
+[node name="SFXLabel" type="Label" parent="CanvasLayer/StartOverlay/SettingsModal/VBox/AudioBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.9, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+text = "SFX AUDIO VOLUME"
+
+[node name="SFXSlider" type="HSlider" parent="CanvasLayer/StartOverlay/SettingsModal/VBox/AudioBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+max_value = 1.0
+step = 0.05
+value = 0.85
+
+[node name="ShakeToggle" type="CheckBox" parent="CanvasLayer/StartOverlay/SettingsModal/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8, 0.9, 1.0, 1)
+theme_override_font_sizes/font_size = 13
+button_pressed = true
+text = "HAPTIC SCREEN SHAKE FEEDBACK"
+
+[node name="CloseSettingsBtn" type="Button" parent="CanvasLayer/StartOverlay/SettingsModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 38)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+text = "APPLY & CLOSE"
+
+[node name="BriefingModal" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(540, 420)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -210.0
+offset_right = 270.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBox_Overlay")
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/BriefingModal"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="Title" type="Label" parent="CanvasLayer/StartOverlay/BriefingModal/VBox"]
@@ -448,7 +773,13 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.9, 1.0, 1)
 theme_override_font_sizes/font_size = 12
-text = "• COLLECT MAGENTA DATA CORES TO ACCELERATE CLOCK FREQ\n• BUILD COMBOS WITHIN 3.2s FOR UP TO 4X MULTIPLIERS\n• ⚡ EMP (CYAN): SLOWS SYSTEM TICK BY 40%\n• 👻 GHOST PHASE (VIOLET): PASS THROUGH BODY SEGMENTS\n• ★ 2X STREAM (GOLD): DOUBLE DATA STREAM SCORE\n• 🔥 TAIL PURGE (ORANGE): INCINERATES 3 TAIL SEGMENTS"
+text = "• COLLECT MAGENTA DATA CORES TO ACCELERATE CLOCK FREQ
+• BUILD COMBOS WITHIN 3.2s FOR UP TO 4X MULTIPLIERS
+• ⚡ EMP (CYAN): SLOWS SYSTEM TICK BY 40%
+• 👻 GHOST PHASE (VIOLET): PASS THROUGH BODY SEGMENTS
+• ★ 2X STREAM (GOLD): DOUBLE DATA STREAM SCORE
+• 🔥 TAIL PURGE (ORANGE): INCINERATES 3 TAIL SEGMENTS
+• 4 GAME MODES: CLASSIC, CIRCUIT MAZE, ZEN WRAP & EXTINCTION"
 autowrap_mode = 2
 
 [node name="CloseBriefingButton" type="Button" parent="CanvasLayer/StartOverlay/BriefingModal/VBox"]
@@ -462,6 +793,68 @@ theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
 theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
 theme_override_styles/pressed = SubResource("StyleBox_Btn_Hover")
 text = "ACKNOWLEDGE"
+
+[node name="QuitConfirmModal" type="PanelContainer" parent="CanvasLayer/StartOverlay"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 280)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -140.0
+offset_right = 250.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBox_Overlay")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/StartOverlay/QuitConfirmModal"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/StartOverlay/QuitConfirmModal/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.32, 0.45, 1)
+theme_override_font_sizes/font_size = 24
+text = "TERMINATE SESSION?"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="CanvasLayer/StartOverlay/QuitConfirmModal/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.86, 0.96, 1)
+theme_override_font_sizes/font_size = 13
+text = "DISCONNECT FROM THE NEON GRID AND CLOSE THE APPLICATION?"
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="ConfirmQuitButton" type="Button" parent="CanvasLayer/StartOverlay/QuitConfirmModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.62, 0.66, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Sec_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Sec_Hover")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Sec_Hover")
+text = "CONFIRM TERMINATION"
+
+[node name="CancelQuitButton" type="Button" parent="CanvasLayer/StartOverlay/QuitConfirmModal/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.8, 0.92, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBox_Btn_Normal")
+theme_override_styles/hover = SubResource("StyleBox_Btn_Hover")
+theme_override_styles/pressed = SubResource("StyleBox_Btn_Hover")
+text = "RETURN TO CONSOLE"
 
 [node name="PauseOverlay" type="Control" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -638,5 +1031,5 @@ text = "WASD / ARROWS : MOVE  •  P / SPACE : PAUSE  •  F11 : FULLSCREEN"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.55, 0.68, 1)
 theme_override_font_sizes/font_size = 11
-text = "ARCADE PROTOCOL // v3.5-MENU-EDITION"
+text = "ARCADE PROTOCOL // v4.0-GRID-EXPANSION"
 horizontal_alignment = 2
