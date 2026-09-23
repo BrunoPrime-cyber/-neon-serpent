@@ -1,0 +1,28 @@
+; Engine configuration file.
+; NEON SERPENT — Godot 4.7 project.
+
+config_version=5
+
+[application]
+
+config/name="NEON SERPENT"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+
+[display]
+
+[display/window]
+
+size/viewport_width=1152
+size/viewport_height=900
+size/window_width_override=1152
+size/window_height_override=900
+size/resizable=true
+stretch/mode="canvas_items"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+rendering_2d/default_canvas_item_texture_filter=0
+rendering_2d/default_canvas_item_texture_repeat=0
